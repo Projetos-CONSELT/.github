@@ -2,231 +2,717 @@
 <html lang="pt-BR">
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<title>Projetos CONSELT — Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Projetos CONSELT</title>
 	<style>
-		:root{
-			--bg:#0d1117; --panel:#161b22; --muted:#9096a0; --accent:#d94b2b; --card-radius:12px;
+		:root {
+			--bg: #0d1117;
+			--surface: #161b22;
+			--surface-2: #1b2430;
+			--border: #30363d;
+			--text: #e6edf3;
+			--muted: #9da7b3;
+			--accent: #e25c2a;
+			--accent-2: #ff8b5d;
+			--shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+			--radius: 18px;
+			--max-width: 1180px;
 		}
-		html,body{height:100%;}
-		body{margin:0;font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;background:var(--bg);color:#e6edf3}
-		.container{max-width:1100px;margin:24px auto;padding:16px}
-		header{display:flex;gap:16px;align-items:center}
-		header img{height:56px}
-		header .titles{line-height:1}
-		header h1{margin:0;font-size:1.25rem}
-		header p{margin:0;color:var(--muted);font-size:0.95rem}
-		.links{margin-left:auto;display:flex;gap:8px}
-		.links a{color:var(--muted);text-decoration:none;font-size:0.9rem}
 
-		.controls{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
-		.search{flex:1;min-width:220px}
-		input[type="search"]{width:100%;padding:10px;border-radius:10px;border:1px solid #23272b;background:transparent;color:inherit}
-		.filters{display:flex;gap:8px;flex-wrap:wrap}
-		.badge-btn{background:transparent;border:1px solid #25303a;color:var(--muted);padding:8px 10px;border-radius:999px;cursor:pointer}
-		.badge-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			background:
+				radial-gradient(circle at top left, rgba(226, 92, 42, 0.15), transparent 28%),
+				radial-gradient(circle at top right, rgba(255, 139, 93, 0.12), transparent 24%),
+				var(--bg);
+			color: var(--text);
+		}
 
-		.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:20px}
-		.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid #20262b;padding:14px;border-radius:var(--card-radius);transition:transform .18s,box-shadow .18s}
-		.card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
-		.meta{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:0.875rem;margin-bottom:8px}
-		.title{font-weight:600;margin:0 0 6px 0}
-		.desc{color:var(--muted);font-size:0.95rem;margin-bottom:10px;min-height:40px}
-		.langs{display:flex;gap:8px;flex-wrap:wrap}
-		.pill{background:#0b1114;padding:6px 8px;border-radius:8px;border:1px solid #1b2226;font-size:0.82rem}
-		.actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
-		.btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
-		footer{margin-top:26px;color:var(--muted);font-size:0.9rem;text-align:center}
+		a { color: inherit; }
+		.page { min-height: 100vh; }
+		.shell { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
 
-		.empty{padding:40px;border:1px dashed #263238;border-radius:12px;color:var(--muted);text-align:center}
+		.navbar {
+			position: sticky;
+			top: 0;
+			z-index: 30;
+			backdrop-filter: blur(12px);
+			background: rgba(13, 17, 23, 0.82);
+			border-bottom: 1px solid rgba(48, 54, 61, 0.8);
+		}
+		.navbar__inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 14px 0;
+		}
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			min-width: 0;
+		}
+		.brand img {
+			width: 44px;
+			height: 44px;
+			border-radius: 12px;
+			object-fit: cover;
+			border: 1px solid rgba(255,255,255,0.08);
+			background: #0b0f14;
+		}
+		.brand__text { min-width: 0; }
+		.brand__text strong {
+			display: block;
+			font-size: 1rem;
+			letter-spacing: 0.2px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.brand__text span {
+			display: block;
+			font-size: 0.84rem;
+			color: var(--muted);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.navlinks {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+		.icon-link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 38px;
+			height: 38px;
+			border-radius: 12px;
+			border: 1px solid var(--border);
+			background: rgba(255,255,255,0.02);
+			text-decoration: none;
+			transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+		}
+		.icon-link:hover { transform: translateY(-2px); border-color: rgba(226,92,42,0.7); background: rgba(226,92,42,0.12); }
+		.icon-link svg { width: 18px; height: 18px; fill: currentColor; color: #cdd9e5; }
 
-		@media(max-width:600px){header img{height:48px}.links{display:none}}
+		.hero {
+			padding: 48px 0 24px;
+		}
+		.hero__panel {
+			background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--surface);
+			border: 1px solid var(--border);
+			border-radius: 28px;
+			box-shadow: var(--shadow);
+			padding: 28px;
+			overflow: hidden;
+			position: relative;
+		}
+		.hero__panel::after {
+			content: "";
+			position: absolute;
+			inset: auto -80px -120px auto;
+			width: 280px;
+			height: 280px;
+			border-radius: 50%;
+			background: radial-gradient(circle, rgba(226,92,42,0.22), transparent 70%);
+			pointer-events: none;
+		}
+		.hero h1 {
+			margin: 0 0 12px;
+			font-size: clamp(2rem, 3vw, 3.4rem);
+			line-height: 1.05;
+			letter-spacing: -0.03em;
+		}
+		.hero p {
+			max-width: 760px;
+			margin: 0 0 20px;
+			color: var(--muted);
+			font-size: 1.02rem;
+			line-height: 1.6;
+		}
+		.cta-row {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			align-items: center;
+		}
+		.button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 12px 18px;
+			border-radius: 999px;
+			border: 1px solid transparent;
+			font-weight: 700;
+			text-decoration: none;
+			transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+		}
+		.button:hover { transform: translateY(-2px); }
+		.button--primary {
+			background: linear-gradient(135deg, var(--accent), var(--accent-2));
+			color: #fff;
+			box-shadow: 0 12px 24px rgba(226, 92, 42, 0.3);
+		}
+		.button--ghost {
+			background: rgba(255,255,255,0.02);
+			border-color: var(--border);
+			color: var(--text);
+		}
+
+		.toolbar {
+			display: grid;
+			gap: 14px;
+			margin: 24px 0 18px;
+		}
+		.filters {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+		.filter-btn {
+			border: 1px solid var(--border);
+			background: rgba(255,255,255,0.02);
+			color: var(--text);
+			padding: 10px 14px;
+			border-radius: 999px;
+			font: inherit;
+			cursor: pointer;
+			transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+		}
+		.filter-btn:hover { transform: translateY(-1px); border-color: rgba(226,92,42,0.7); }
+		.filter-btn.active { background: rgba(226,92,42,0.16); border-color: rgba(226,92,42,0.8); color: #fff; }
+		.search {
+			width: 100%;
+			background: var(--surface);
+			border: 1px solid var(--border);
+			border-radius: 18px;
+			padding: 14px 16px;
+			color: var(--text);
+			font: inherit;
+			outline: none;
+			transition: border-color 160ms ease, box-shadow 160ms ease;
+		}
+		.search:focus {
+			border-color: rgba(226,92,42,0.85);
+			box-shadow: 0 0 0 4px rgba(226,92,42,0.15);
+		}
+		.search::placeholder { color: #7d8793; }
+
+		.status {
+			margin: 0 0 18px;
+			color: var(--muted);
+			min-height: 24px;
+		}
+
+		.grid {
+			display: grid;
+			gap: 18px;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			padding-bottom: 34px;
+		}
+		.card,
+		.skeleton {
+			background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--surface);
+			border: 1px solid var(--border);
+			border-radius: 22px;
+			box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+		}
+		.card {
+			display: flex;
+			flex-direction: column;
+			padding: 18px;
+			min-height: 250px;
+			transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+		}
+		.card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 18px 34px rgba(0,0,0,0.24);
+			border-color: rgba(226,92,42,0.8);
+		}
+		.card__top {
+			display: flex;
+			align-items: flex-start;
+			gap: 12px;
+			justify-content: space-between;
+			margin-bottom: 12px;
+		}
+		.repo-name {
+			margin: 0;
+			font-size: 1.06rem;
+			line-height: 1.35;
+			letter-spacing: -0.01em;
+		}
+		.repo-meta {
+			display: grid;
+			gap: 10px;
+			margin-top: 10px;
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+		.description {
+			color: #c9d1d9;
+			margin: 6px 0 14px;
+			line-height: 1.55;
+			min-height: 52px;
+		}
+		.badges {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			margin-bottom: 12px;
+		}
+		.badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			border-radius: 999px;
+			padding: 7px 11px;
+			font-size: 0.84rem;
+			line-height: 1;
+			border: 1px solid transparent;
+			white-space: nowrap;
+		}
+		.badge--area { color: #fff; font-weight: 700; }
+		.badge--language { background: rgba(255,255,255,0.04); border-color: var(--border); color: #d7dee7; }
+		.badge--stat { background: rgba(255,255,255,0.03); border-color: var(--border); color: #d7dee7; }
+		.dot {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			display: inline-block;
+			flex: 0 0 auto;
+		}
+		.card__footer {
+			margin-top: auto;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			align-items: center;
+			justify-content: space-between;
+			padding-top: 14px;
+		}
+		.repo-link {
+			text-decoration: none;
+			background: var(--accent);
+			color: #fff;
+			border-radius: 999px;
+			padding: 10px 14px;
+			font-weight: 700;
+			transition: transform 160ms ease, box-shadow 160ms ease;
+		}
+		.repo-link:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(226,92,42,0.28); }
+		.muted { color: var(--muted); }
+
+		.empty-state,
+		.error-state {
+			grid-column: 1 / -1;
+			background: var(--surface);
+			border: 1px dashed var(--border);
+			border-radius: 22px;
+			padding: 28px;
+			text-align: center;
+			color: var(--muted);
+		}
+
+		.skeleton {
+			overflow: hidden;
+			position: relative;
+			min-height: 250px;
+		}
+		.skeleton::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			transform: translateX(-100%);
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+			animation: shimmer 1.2s infinite;
+		}
+		.skeleton__inner {
+			position: relative;
+			padding: 18px;
+			display: grid;
+			gap: 12px;
+		}
+		.line,
+		.pill {
+			background: rgba(255,255,255,0.05);
+			border-radius: 999px;
+			height: 12px;
+		}
+		.line--lg { height: 20px; width: 72%; }
+		.line--md { width: 52%; }
+		.line--sm { width: 36%; }
+		.pills { display: flex; gap: 8px; flex-wrap: wrap; }
+		.pill { height: 28px; width: 92px; border-radius: 999px; }
+
+		.footer {
+			border-top: 1px solid var(--border);
+			background: rgba(255,255,255,0.02);
+			padding: 20px 0 28px;
+			color: var(--muted);
+		}
+		.footer__inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			flex-wrap: wrap;
+		}
+		.footer__links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 14px;
+		}
+		.footer__links a {
+			color: #d7dee7;
+			text-decoration: none;
+			border-bottom: 1px solid transparent;
+			transition: border-color 160ms ease, color 160ms ease;
+		}
+		.footer__links a:hover { color: #fff; border-color: var(--accent); }
+
+		@keyframes shimmer {
+			100% { transform: translateX(100%); }
+		}
+
+		@media (max-width: 1024px) {
+			.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.navbar__inner { align-items: flex-start; flex-direction: column; }
+			.navlinks { justify-content: flex-start; }
+		}
+		@media (max-width: 680px) {
+			.shell { padding: 0 14px; }
+			.hero { padding-top: 22px; }
+			.hero__panel { padding: 20px; border-radius: 22px; }
+			.grid { grid-template-columns: 1fr; }
+			.footer__inner { flex-direction: column; align-items: flex-start; }
+			.card__footer { flex-direction: column; align-items: flex-start; }
+		}
 	</style>
-	<!-- Ícones simples via emoji; sem frameworks externos -->
-	<script>
-		// Funções utilitárias e renderização do dashboard
-		const ORG_DEFAULT = 'Projetos-CONSELT';
-		const ACCENT = getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#d94b2b';
-
-		// Detecta área de serviço com base em topics (preferência) e nome como fallback
-		function detectArea(topics = [], name = ''){
-			const t = (topics||[]).map(x=>x.toLowerCase());
-			const n = (name||'').toLowerCase();
-			const areas = [
-				{key:'web-dev', emoji:'🌐', label:'Desenvolvimento Web'},
-				{key:'luminotecnica', emoji:'💡', label:'Luminotécnica'},
-				{key:'itel', emoji:'⚡', label:'ITEL'},
-				{key:'automacao-residencial', emoji:'🏠', label:'Automação Residencial'},
-			];
-			// checar topics
-			for(const a of areas) if(t.includes(a.key)) return a;
-			// fallback por nome
-			if(/web|site|wordpress|woocommerce|landing/.test(n)) return areas[0];
-			if(/lumin|dialux|ilumina|lighting/.test(n)) return areas[1];
-			if(/itel|eletric|electr|autocad|revit/.test(n)) return areas[2];
-			if(/automacao|automação|automation|esp32|arduino|home/.test(n)) return areas[3];
-			return {key:'outros', emoji:'📁', label:'Outros'};
-		}
-
-		// Formata nome do repositório
-		function formatName(name){ return name.replace(/[_-]+/g,' ').replace(/\b(\w)/g,m=>m.toUpperCase()); }
-
-		async function ghFetch(url, token, accept){
-			const headers = {'Accept': accept || 'application/vnd.github.v3+json'};
-			if(token) headers['Authorization']= 'token '+token;
-			const res = await fetch(url,{headers});
-			if(!res.ok){
-				const txt = await res.text().catch(()=>res.statusText);
-				throw new Error(`${res.status} ${res.statusText} - ${txt}`);
-			}
-			return res.json();
-		}
-
-		// Renderiza todos os cards
-		async function loadProjects(token){
-			const listEl = document.getElementById('grid');
-			const statusEl = document.getElementById('status');
-			listEl.innerHTML='';
-			statusEl.textContent='Carregando repositórios...';
-			try{
-				const repos = await ghFetch(`https://api.github.com/orgs/${ORG_DEFAULT}/repos?per_page=100`, token);
-				if(!repos || repos.length===0){
-					listEl.innerHTML = '<div class="empty">Nenhum repositório encontrado para a organização.</div>';
-					statusEl.textContent = 'Nenhum repositório.';
-					return repos;
-				}
-
-				// obter topics por repositório (usa mercy preview)
-				const detailed = await Promise.all(repos.map(async r=>{
-					try{
-						const topics = await ghFetch(`https://api.github.com/repos/${r.owner.login}/${r.name}/topics`, token, 'application/vnd.github.mercy-preview+json');
-						return {...r, topics: topics.names||[]};
-					}catch(e){ return {...r, topics: []}; }
-				}));
-
-				// armazenar dados
-				window.__PROJECTS = detailed.map(r=>({
-					name: r.name,
-					title: formatName(r.name),
-					desc: r.description || '',
-					lang: r.language || '—',
-					updated: r.pushed_at || r.updated_at || r.created_at,
-					stars: r.stargazers_count || 0,
-					forks: r.forks_count || 0,
-					html_url: r.html_url,
-					topics: r.topics||[],
-					area: detectArea(r.topics||[], r.name)
-				}));
-
-				renderGrid(window.__PROJECTS);
-				statusEl.textContent = `Carregados ${window.__PROJECTS.length} repositórios.`;
-				return window.__PROJECTS;
-			}catch(err){
-				console.error(err);
-				statusEl.textContent = 'Erro ao carregar repositórios: '+err.message;
-				document.getElementById('grid').innerHTML = `<div class="empty">Erro ao consultar a API do GitHub. Verifique o token ou tente novamente mais tarde.</div>`;
-				return [];
-			}
-		}
-
-		function renderGrid(items){
-			const grid = document.getElementById('grid');
-			grid.innerHTML='';
-			for(const it of items){
-				const card = document.createElement('article'); card.className='card';
-				card.innerHTML = `
-					<div class="meta"><span class="pill">${it.area.emoji} ${it.area.label}</span><span style="margin-left:auto">${new Date(it.updated).toLocaleDateString('pt-BR')}</span></div>
-					<h3 class="title">${it.title}</h3>
-					<div class="desc">${it.desc||'<span style="color:var(--muted)">Sem descrição</span>'}</div>
-					<div class="langs">
-						<div class="pill">🧾 ${it.lang}</div>
-						<div class="pill">⭐ ${it.stars} &nbsp; 🍴 ${it.forks}</div>
-					</div>
-					<div class="actions">
-						<a class="btn" href="${it.html_url}" target="_blank" rel="noopener">Ver Repositório</a>
-						<div style="color:var(--muted);font-size:0.85rem">Tópicos: ${ (it.topics||[]).slice(0,3).join(', ') || '—' }</div>
-					</div>
-				`;
-				grid.appendChild(card);
-			}
-		}
-
-		// filtros e busca
-		function setupControls(){
-			const filters = document.querySelectorAll('.filter-btn');
-			filters.forEach(b=>b.addEventListener('click',()=>{
-				filters.forEach(x=>x.classList.remove('active'));
-				b.classList.add('active');
-				applyFilters();
-			}));
-
-			document.getElementById('search').addEventListener('input',applyFilters);
-		}
-
-		function applyFilters(){
-			const active = document.querySelector('.filter-btn.active')?.dataset?.area || 'all';
-			const q = document.getElementById('search').value.trim().toLowerCase();
-			const items = window.__PROJECTS || [];
-			const filtered = items.filter(p=>{
-				const matchArea = (active==='all') || (p.area.key===active);
-				const matchQuery = !q || p.title.toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q);
-				return matchArea && matchQuery;
-			});
-			renderGrid(filtered);
-		}
-
-		// inicialização
-		document.addEventListener('DOMContentLoaded', async ()=>{
-			document.getElementById('orgName').textContent = ORG_DEFAULT;
-			document.getElementById('loadBtn').addEventListener('click', ()=>{
-				const token = document.getElementById('token').value.trim();
-				loadProjects(token).then(()=>applyFilters());
-			});
-			setupControls();
-			// carrega automaticamente sem token
-			loadProjects().then(()=>applyFilters());
-		});
-	</script>
 </head>
 <body>
-	<div class="container">
-		<header>
-			<img src="https://conselt.com.br/wp-content/uploads/2024/03/logo-1.png" alt="CONSELT logo">
-			<div class="titles">
-				<h1>Projetos CONSELT</h1>
-				<p>Organização de projetos técnicos da Empresa Júnior de Engenharia Elétrica da UFU</p>
-			</div>
-			<div class="links">
-				<a href="https://conselt.com.br" target="_blank">Site</a>
-				<a href="https://www.instagram.com/conselt_ej" target="_blank">Instagram</a>
-				<a href="https://www.linkedin.com/company/conselt/" target="_blank">LinkedIn</a>
-				<a href="https://wa.link/uzdmop" target="_blank">WhatsApp</a>
+	<div class="page">
+		<header class="navbar">
+			<div class="shell navbar__inner">
+				<a class="brand" href="https://github.com/Projetos-CONSELT" target="_blank" rel="noopener noreferrer">
+					<img src="https://conselt.com.br/wp-content/uploads/2024/03/logo-1.png" alt="Logo CONSELT" />
+					<div class="brand__text">
+						<strong>Projetos CONSELT</strong>
+						<span>Portfólio técnico da CONSELT</span>
+					</div>
+				</a>
+
+				<nav class="navlinks" aria-label="Links sociais">
+					<a class="icon-link" href="https://conselt.com.br" target="_blank" rel="noopener noreferrer" aria-label="Site">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm7.93 9h-3.16a15.6 15.6 0 0 0-1.09-5.02A8.01 8.01 0 0 1 19.93 11ZM12 4c.85 0 2.13 2.23 2.69 7H9.31C9.87 6.23 11.15 4 12 4Zm-2.69 9h5.38C14.13 17.77 12.85 20 12 20s-2.13-2.23-2.69-7ZM8.33 5.98A15.6 15.6 0 0 0 7.24 11H4.07a8.01 8.01 0 0 1 4.26-5.02ZM4.07 13h3.17a15.6 15.6 0 0 0 1.09 5.02A8.01 8.01 0 0 1 4.07 13Zm11.6 5.02A15.6 15.6 0 0 0 16.76 13h3.17a8.01 8.01 0 0 1-4.26 5.02Z"/></svg>
+					</a>
+					<a class="icon-link" href="https://www.instagram.com/conselt_ej" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5a4.25 4.25 0 0 0 4.25 4.25h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.5-1.8a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg>
+					</a>
+					<a class="icon-link" href="https://www.linkedin.com/company/conselt/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 6.5A1.94 1.94 0 1 1 5 4.56 1.94 1.94 0 0 1 6.94 6.5ZM5.5 8.75h2.88V20H5.5Zm4.47 0h2.76v1.54h.04a3.03 3.03 0 0 1 2.73-1.5c2.92 0 3.46 1.92 3.46 4.41V20h-2.88v-5.12c0-1.22-.02-2.79-1.71-2.79s-1.97 1.3-1.97 2.7V20H9.97Z"/></svg>
+					</a>
+					<a class="icon-link" href="https://wa.link/uzdmop" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a9.99 9.99 0 0 0-8.57 15.16L2 22l4.97-1.38A10 10 0 1 0 12 2Zm0 1.5a8.5 8.5 0 0 1 0 17 8.44 8.44 0 0 1-4.35-1.2l-.31-.18-2.95.82.81-2.87-.2-.32A8.5 8.5 0 1 1 12 3.5Zm4.87 11.67c-.2.58-1.16 1.09-1.59 1.15-.41.06-.93.09-1.5-.09-.34-.11-.77-.26-1.33-.5-2.34-1-3.87-3.37-4-3.53-.13-.16-.95-1.26-.95-2.4s.6-1.69.82-1.92c.22-.23.48-.29.64-.29h.46c.15 0 .36-.06.56.42.2.48.67 1.65.73 1.77.06.12.1.26.02.42-.09.16-.13.26-.26.4-.13.14-.27.31-.39.42-.13.12-.27.25-.12.51.15.26.67 1.11 1.43 1.8.98.88 1.81 1.15 2.07 1.28.26.13.42.11.58-.06.16-.17.68-.79.86-1.06.18-.27.35-.22.59-.13.24.09 1.52.72 1.78.85.26.13.43.19.49.3.06.11.06.66-.14 1.24Z"/></svg>
+					</a>
+				</nav>
 			</div>
 		</header>
 
-		<div class="controls">
-			<div class="search"><input id="search" type="search" placeholder="Pesquisar projetos por nome ou descrição..." /></div>
-			<div class="filters">
-				<button class="badge-btn filter-btn active" data-area="all">Todos</button>
-				<button class="badge-btn filter-btn" data-area="web-dev">🌐 Web Dev</button>
-				<button class="badge-btn filter-btn" data-area="luminotecnica">💡 Luminotécnica</button>
-				<button class="badge-btn filter-btn" data-area="itel">⚡ ITEL</button>
-				<button class="badge-btn filter-btn" data-area="automacao-residencial">🏠 Automação</button>
-				<button class="badge-btn filter-btn" data-area="outros">📁 Outros</button>
-			</div>
-			<div style="margin-left:auto;display:flex;gap:8px;align-items:center">
-				<input id="token" placeholder="Token GitHub (opcional)" style="background:transparent;border:1px solid #25303a;color:inherit;padding:8px;border-radius:8px" />
-				<button id="loadBtn" class="badge-btn">Carregar</button>
-			</div>
-		</div>
+		<main>
+			<section class="hero">
+				<div class="shell">
+					<div class="hero__panel">
+						<h1>Projetos CONSELT</h1>
+						<p>Organização de projetos técnicos da Empresa Júnior de Engenharia Elétrica da UFU. Explore os repositórios públicos, filtre por área de serviço e acompanhe os projetos do portfólio técnico da CONSELT.</p>
+						<div class="cta-row">
+							<a class="button button--primary" href="https://conselt.com.br" target="_blank" rel="noopener noreferrer">Acessar o site da CONSELT</a>
+							<a class="button button--ghost" href="https://github.com/Projetos-CONSELT" target="_blank" rel="noopener noreferrer">Ver organização no GitHub</a>
+						</div>
+					</div>
+				</div>
+			</section>
 
-		<p id="status" style="color:var(--muted);margin-top:12px">Carregando projetos...</p>
+			<section class="shell">
+				<div class="toolbar" aria-label="Ferramentas do dashboard">
+					<div class="filters" id="filters">
+						<button class="filter-btn active" data-area="all" type="button">Todos</button>
+						<button class="filter-btn" data-area="web-dev" type="button">🌐 Web</button>
+						<button class="filter-btn" data-area="luminotecnica" type="button">💡 Luminotécnica</button>
+						<button class="filter-btn" data-area="itel" type="button">⚡ ITEL</button>
+						<button class="filter-btn" data-area="automacao-residencial" type="button">🏠 Automação</button>
+					</div>
+					<input class="search" id="searchInput" type="search" placeholder="Buscar projeto..." autocomplete="off" />
+				</div>
 
-		<main class="grid" id="grid" aria-live="polite">
-			<!-- cards são injetados aqui -->
+				<p class="status" id="statusMessage">Carregando projetos...</p>
+				<section class="grid" id="projectsGrid" aria-live="polite"></section>
+			</section>
 		</main>
 
-		<footer>Desenvolvido por CONSELT | conselt.com.br | contato@conselt.com.br</footer>
+		<footer class="footer">
+			<div class="shell footer__inner">
+				<div>
+					<strong style="color:#fff; display:block; margin-bottom:6px;">CONSELT</strong>
+					<div class="muted">Av. João Naves de Ávila, 2121 - Bloco 1N, Sala 06 - Saraiva, Uberlândia - MG</div>
+					<div class="muted">contato@conselt.com.br</div>
+				</div>
+				<div class="footer__links">
+					<a href="https://github.com/Projetos-CONSELT" target="_blank" rel="noopener noreferrer">← Voltar para a organização</a>
+					<a href="https://conselt.com.br" target="_blank" rel="noopener noreferrer">Website</a>
+					<a href="https://www.instagram.com/conselt_ej" target="_blank" rel="noopener noreferrer">Instagram</a>
+					<a href="https://www.linkedin.com/company/conselt/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				</div>
+			</div>
+		</footer>
 	</div>
+
+	<script>
+		const ORG = 'Projetos-CONSELT';
+		const API_BASE = 'https://api.github.com';
+		const state = {
+			repos: [],
+			filter: 'all',
+			query: ''
+		};
+
+		const languageColors = {
+			JavaScript: '#f1e05a',
+			TypeScript: '#3178c6',
+			HTML: '#e34c26',
+			CSS: '#563d7c',
+			Python: '#3572A5',
+			PHP: '#4F5D95',
+			C: '#555555',
+			'C++': '#f34b7d',
+			Java: '#b07219',
+			Dart: '#00B4AB',
+			Shell: '#89e051'
+		};
+
+		function formatRepoName(name) {
+			return name
+				.replace(/[_-]+/g, ' ')
+				.split(' ')
+				.filter(Boolean)
+				.map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+				.join(' ');
+		}
+
+		function getServiceArea(repo) {
+			const topics = (repo.topics || []).map((topic) => String(topic).toLowerCase());
+			const name = String(repo.name || '').toLowerCase();
+
+			if (topics.includes('web-dev') || name.includes('web') || name.includes('site') || name.includes('wordpress')) {
+				return { key: 'web-dev', label: '🌐 Web Dev', color: '#2563eb' };
+			}
+
+			if (topics.includes('luminotecnica') || name.includes('lumino') || name.includes('dialux') || name.includes('iluminacao')) {
+				return { key: 'luminotecnica', label: '💡 Luminotécnica', color: '#d97706' };
+			}
+
+			if (topics.includes('itel') || name.includes('eletric') || name.includes('itel') || name.includes('projeto-eletrico')) {
+				return { key: 'itel', label: '⚡ ITEL', color: '#7c3aed' };
+			}
+
+			if (topics.includes('automacao') || name.includes('automacao') || name.includes('arduino') || name.includes('esp32')) {
+				return { key: 'automacao-residencial', label: '🏠 Automação', color: '#16a34a' };
+			}
+
+			return { key: 'outros', label: '📁 Interno', color: '#6b7280' };
+		}
+
+		async function ghFetch(url, acceptHeader) {
+			const response = await fetch(url, {
+				headers: acceptHeader ? { Accept: acceptHeader } : { Accept: 'application/vnd.github.v3+json' }
+			});
+
+			if (!response.ok) {
+				throw new Error(`Falha ao consultar ${url}`);
+			}
+
+			return response.json();
+		}
+
+		async function fetchAllRepos() {
+			const allRepos = [];
+			let page = 1;
+
+			while (true) {
+				const pageRepos = await ghFetch(`${API_BASE}/orgs/${ORG}/repos?per_page=100&page=${page}`);
+				allRepos.push(...pageRepos);
+				if (!Array.isArray(pageRepos) || pageRepos.length < 100) break;
+				page += 1;
+			}
+
+			return allRepos;
+		}
+
+		async function fetchTopics(repoName) {
+			const data = await ghFetch(`${API_BASE}/repos/${ORG}/${encodeURIComponent(repoName)}/topics`, 'application/vnd.github.mercy-preview+json');
+			return data.names || [];
+		}
+
+		function createSkeletonCards(count = 6) {
+			const grid = document.getElementById('projectsGrid');
+			grid.innerHTML = Array.from({ length: count })
+				.map(() => `
+					<article class="skeleton" aria-hidden="true">
+						<div class="skeleton__inner">
+							<div class="line line--lg"></div>
+							<div class="line line--md"></div>
+							<div class="line line--sm"></div>
+							<div class="pills"><span class="pill"></span><span class="pill"></span></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line line--md"></div>
+						</div>
+					</article>
+				`)
+				.join('');
+		}
+
+		function renderEmptyState(message) {
+			document.getElementById('projectsGrid').innerHTML = `<div class="empty-state">${message}</div>`;
+		}
+
+		function renderErrorState() {
+			document.getElementById('projectsGrid').innerHTML = '<div class="error-state">Não foi possível carregar os projetos. Tente novamente mais tarde.</div>';
+		}
+
+		function languageBadge(language) {
+			const color = languageColors[language] || '#8b949e';
+			return `
+				<span class="badge badge--language">
+					<span class="dot" style="background:${color}"></span>
+					${language || 'Desconhecida'}
+				</span>
+			`;
+		}
+
+		function renderProjects(items) {
+			const grid = document.getElementById('projectsGrid');
+
+			if (!items.length) {
+				renderEmptyState('Nenhum projeto encontrado. Tente outro filtro.');
+				return;
+			}
+
+			grid.innerHTML = items.map((repo) => {
+				const area = getServiceArea(repo);
+				const description = repo.description ? repo.description : 'Sem descrição disponível';
+				const updated = repo.updated_at ? new Date(repo.updated_at).toLocaleDateString('pt-BR') : 'Data indisponível';
+				const language = repo.language || 'Não informado';
+
+				return `
+					<article class="card">
+						<div class="card__top">
+							<div>
+								<h2 class="repo-name">📁 ${formatRepoName(repo.name)}</h2>
+								<div class="repo-meta muted">${updated}</div>
+							</div>
+							<span class="badge badge--area" style="background:${area.color}">${area.label}</span>
+						</div>
+
+						<p class="description">${description}</p>
+
+						<div class="badges">
+							${languageBadge(language)}
+							<span class="badge badge--stat">⭐ ${repo.stargazers_count || 0}</span>
+							<span class="badge badge--stat">🍴 ${repo.forks_count || 0}</span>
+						</div>
+
+						<div class="card__footer">
+							<a class="repo-link" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">Ver Repositório</a>
+							<span class="muted">${(repo.topics || []).slice(0, 3).join(' · ') || 'Sem tópicos públicos'}</span>
+						</div>
+					</article>
+				`;
+			}).join('');
+		}
+
+		function applyFilters() {
+			const query = state.query.trim().toLowerCase();
+
+			const filtered = state.repos.filter((repo) => {
+				const area = getServiceArea(repo);
+				const matchesArea = state.filter === 'all' || area.key === state.filter;
+				const matchesQuery = !query || String(repo.name).toLowerCase().includes(query) || String(repo.description || '').toLowerCase().includes(query);
+				return matchesArea && matchesQuery;
+			});
+
+			renderProjects(filtered);
+		}
+
+		function setupControls() {
+			const searchInput = document.getElementById('searchInput');
+			const filterButtons = Array.from(document.querySelectorAll('.filter-btn'));
+
+			searchInput.addEventListener('input', (event) => {
+				state.query = event.target.value;
+				applyFilters();
+			});
+
+			filterButtons.forEach((button) => {
+				button.addEventListener('click', () => {
+					filterButtons.forEach((other) => other.classList.remove('active'));
+					button.classList.add('active');
+					state.filter = button.dataset.area || 'all';
+					applyFilters();
+				});
+			});
+		}
+
+		async function loadDashboard() {
+			const status = document.getElementById('statusMessage');
+
+			try {
+				createSkeletonCards();
+				status.textContent = 'Carregando projetos da organização...';
+
+				const repos = await fetchAllRepos();
+
+				if (!repos.length) {
+					state.repos = [];
+					renderEmptyState('Nenhum projeto encontrado. Tente outro filtro.');
+					status.textContent = 'Nenhum projeto encontrado.';
+					return;
+				}
+
+				const reposWithTopics = await Promise.all(
+					repos.map(async (repo) => {
+						try {
+							const topics = await fetchTopics(repo.name);
+							return { ...repo, topics };
+						} catch (error) {
+							return { ...repo, topics: [] };
+						}
+					})
+				);
+
+				state.repos = reposWithTopics.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+				status.textContent = `${state.repos.length} projetos carregados.`;
+				applyFilters();
+			} catch (error) {
+				console.error(error);
+				status.textContent = 'Não foi possível carregar os projetos. Tente novamente mais tarde.';
+				renderErrorState();
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			setupControls();
+			loadDashboard();
+		});
+	</script>
 </body>
 </html>
