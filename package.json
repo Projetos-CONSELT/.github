@@ -1,9 +1,11 @@
 {
-  "name": "demo-repo",
-  "version": "0.2.0",
-  "description": "A sample package.json",
-  "dependencies": {
-    "@primer/css": "17.0.1"
+  "name": "introducao-projetos-conselt",
+  "version": "1.0.0",
+  "description": "Dashboard central de projetos da organização Projetos-CONSELT",
+  "scripts": {
+    "start": "serve . -p 3000",
+    "lint": "echo 'No lint configured yet'",
+    "deploy": "echo 'Deploy via GitHub Pages (branch main)'"
   },
   "license": "MIT"
 }
