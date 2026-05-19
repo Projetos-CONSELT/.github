@@ -1,6 +1,10 @@
 # Projetos-CONSELT
 
-Bem-vindo ao repositório de suporte para a organização GitHub **Projetos-CONSELT** — o portfólio técnico da CONSELT (Consultoria em Engenharia e Soluções Tecnológicas), uma empresa júnior vinculada à Faculdade de Engenharia Elétrica da Universidade Federal de Uberlândia (UFU).
+Bem-vindo ao repositório de suporte da organização GitHub **Projetos-CONSELT**. O portal público e a navegação principal da organização agora estão centralizados no repositório canônico [Projetos-CONSELT/.github](https://github.com/Projetos-CONSELT/.github).
+
+Para acessar o dashboard público de projetos, use: [https://projetos-conselt.github.io/.github](https://projetos-conselt.github.io/.github)
+
+Este portfólio representa a CONSELT (Consultoria em Engenharia e Soluções Tecnológicas), uma empresa júnior vinculada à Faculdade de Engenharia Elétrica da Universidade Federal de Uberlândia (UFU).
 
 ## Sobre a organização
 
@@ -54,7 +58,7 @@ Desenvolvido por CONSELT | conselt.com.br
 
 ---
 
-Este repositório contém modelos e diretrizes organizacionais. Para templates específicos de issues, pull requests e CONTRIBUTING, veja a pasta `.github`.
+Este repositório contém modelos e diretrizes organizacionais. Para ver a vitrine pública da organização, acesse o repositório canônico [Projetos-CONSELT/.github](https://github.com/Projetos-CONSELT/.github).
 
 Desenvolvido por CONSELT | conselt.com.br
 
