@@ -21,7 +21,7 @@ Nossa missão é promover o desenvolvimento profissional e pessoal dos estudante
 
 ## Estatísticas
 
-![Repositórios](https://img.shields.io/github/search/Projetos-CONSELT/repositories?label=Reposit%C3%B3rios&color=blue)
+![Portfólio técnico](https://img.shields.io/badge/Portf%C3%B3lio%20t%C3%A9cnico-CONSELT-0d1117?style=flat&logo=github&logoColor=white)
 ![Seguidores](https://img.shields.io/github/followers/Projetos-CONSELT?label=Seguidores&style=social)
 
 <div align="center">
