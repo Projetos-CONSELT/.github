@@ -25,7 +25,7 @@ Nossa missão é promover o desenvolvimento profissional e pessoal dos estudante
 ![Seguidores](https://img.shields.io/github/followers/Projetos-CONSELT?label=Seguidores&style=social)
 
 <div align="center">
-	<a href="https://projetos-conselt.github.io/introducao_projetos/">
+	<a href="https://projetos-conselt.github.io/.github/">
 		<img src="https://img.shields.io/badge/%F0%9F%94%97%20Ver%20Dashboard%20Completo%20de%20Projetos-0d1117?style=for-the-badge&logo=github&logoColor=white" alt="Ver Dashboard Completo" />
 	</a>
 </div>
