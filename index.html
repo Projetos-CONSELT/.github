@@ -6,15 +6,18 @@
 	<title>Projetos CONSELT</title>
 	<style>
 		:root {
-			--bg: #0d1117;
-			--surface: #161b22;
-			--surface-2: #1b2430;
-			--border: #30363d;
-			--text: #e6edf3;
-			--muted: #9da7b3;
-			--accent: #e25c2a;
-			--accent-2: #ff8b5d;
-			--shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+			--bg: #090d16;
+			--surface: #0f172a;
+			--surface-2: #1e293b;
+			--border: rgba(255, 255, 255, 0.08);
+			--border-hover: rgba(4, 107, 210, 0.5);
+			--text: #f8fafc;
+			--muted: #94a3b8;
+			--accent: #046BD2;
+			--accent-2: #0284C7;
+			--accent-glow: rgba(4, 107, 210, 0.35);
+			--cyan-glow: #00d2ff;
+			--shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
 			--radius: 18px;
 			--max-width: 1180px;
 		}
@@ -23,10 +26,10 @@
 		html { scroll-behavior: smooth; }
 		body {
 			margin: 0;
-			font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Inter, sans-serif;
 			background:
-				radial-gradient(circle at top left, rgba(226, 92, 42, 0.15), transparent 28%),
-				radial-gradient(circle at top right, rgba(255, 139, 93, 0.12), transparent 24%),
+				radial-gradient(circle at 10% 0%, rgba(4, 107, 210, 0.22), transparent 35%),
+				radial-gradient(circle at 90% 0%, rgba(0, 210, 255, 0.14), transparent 30%),
 				var(--bg);
 			color: var(--text);
 		}
@@ -39,9 +42,9 @@
 			position: sticky;
 			top: 0;
 			z-index: 30;
-			backdrop-filter: blur(12px);
-			background: rgba(13, 17, 23, 0.82);
-			border-bottom: 1px solid rgba(48, 54, 61, 0.8);
+			backdrop-filter: blur(16px);
+			background: rgba(9, 13, 22, 0.85);
+			border-bottom: 1px solid var(--border);
 		}
 		.navbar__inner {
 			display: flex;
@@ -55,27 +58,30 @@
 			align-items: center;
 			gap: 12px;
 			min-width: 0;
+			text-decoration: none;
 		}
 		.brand img {
 			width: 44px;
 			height: 44px;
 			border-radius: 12px;
 			object-fit: cover;
-			border: 1px solid rgba(255,255,255,0.08);
+			border: 1px solid rgba(4, 107, 210, 0.3);
 			background: #0b0f14;
+			box-shadow: 0 4px 12px rgba(4, 107, 210, 0.25);
 		}
 		.brand__text { min-width: 0; }
 		.brand__text strong {
 			display: block;
-			font-size: 1rem;
-			letter-spacing: 0.2px;
+			font-size: 1.05rem;
+			letter-spacing: 0.3px;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			color: #fff;
 		}
 		.brand__text span {
 			display: block;
-			font-size: 0.84rem;
+			font-size: 0.82rem;
 			color: var(--muted);
 			white-space: nowrap;
 			overflow: hidden;
@@ -92,26 +98,31 @@
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			width: 38px;
-			height: 38px;
+			width: 40px;
+			height: 40px;
 			border-radius: 12px;
 			border: 1px solid var(--border);
 			background: rgba(255,255,255,0.02);
 			text-decoration: none;
-			transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+			transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 		}
-		.icon-link:hover { transform: translateY(-2px); border-color: rgba(226,92,42,0.7); background: rgba(226,92,42,0.12); }
-		.icon-link svg { width: 18px; height: 18px; fill: currentColor; color: #cdd9e5; }
+		.icon-link:hover {
+			transform: translateY(-2px);
+			border-color: rgba(4, 107, 210, 0.7);
+			background: rgba(4, 107, 210, 0.15);
+			box-shadow: 0 6px 16px rgba(4, 107, 210, 0.25);
+		}
+		.icon-link svg { width: 18px; height: 18px; fill: currentColor; color: #cbd5e1; }
 
 		.hero {
-			padding: 48px 0 24px;
+			padding: 42px 0 20px;
 		}
 		.hero__panel {
-			background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--surface);
+			background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.85)), var(--surface);
 			border: 1px solid var(--border);
 			border-radius: 28px;
-			box-shadow: var(--shadow);
-			padding: 28px;
+			box-shadow: var(--shadow), 0 0 40px rgba(4, 107, 210, 0.1);
+			padding: 32px;
 			overflow: hidden;
 			position: relative;
 		}
@@ -119,24 +130,43 @@
 			content: "";
 			position: absolute;
 			inset: auto -80px -120px auto;
-			width: 280px;
-			height: 280px;
+			width: 320px;
+			height: 320px;
 			border-radius: 50%;
-			background: radial-gradient(circle, rgba(226,92,42,0.22), transparent 70%);
+			background: radial-gradient(circle, rgba(4, 107, 210, 0.3), transparent 70%);
 			pointer-events: none;
 		}
+		.hero__badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 6px 14px;
+			border-radius: 999px;
+			background: rgba(4, 107, 210, 0.14);
+			border: 1px solid rgba(4, 107, 210, 0.35);
+			color: #60a5fa;
+			font-size: 0.85rem;
+			font-weight: 600;
+			margin-bottom: 16px;
+			letter-spacing: 0.2px;
+		}
 		.hero h1 {
-			margin: 0 0 12px;
-			font-size: clamp(2rem, 3vw, 3.4rem);
-			line-height: 1.05;
+			margin: 0 0 14px;
+			font-size: clamp(2.1rem, 3.5vw, 3.4rem);
+			line-height: 1.1;
 			letter-spacing: -0.03em;
+		}
+		.gradient-text {
+			background: linear-gradient(135deg, #ffffff 30%, #60a5fa 70%, #00d2ff 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 		}
 		.hero p {
 			max-width: 760px;
-			margin: 0 0 20px;
+			margin: 0 0 24px;
 			color: var(--muted);
-			font-size: 1.02rem;
-			line-height: 1.6;
+			font-size: 1.05rem;
+			line-height: 1.65;
 		}
 		.cta-row {
 			display: flex;
@@ -149,7 +179,7 @@
 			align-items: center;
 			justify-content: center;
 			gap: 10px;
-			padding: 12px 18px;
+			padding: 12px 22px;
 			border-radius: 999px;
 			border: 1px solid transparent;
 			font-weight: 700;
@@ -160,12 +190,19 @@
 		.button--primary {
 			background: linear-gradient(135deg, var(--accent), var(--accent-2));
 			color: #fff;
-			box-shadow: 0 12px 24px rgba(226, 92, 42, 0.3);
+			box-shadow: 0 12px 24px rgba(4, 107, 210, 0.38);
+		}
+		.button--primary:hover {
+			box-shadow: 0 16px 30px rgba(4, 107, 210, 0.5);
 		}
 		.button--ghost {
-			background: rgba(255,255,255,0.02);
+			background: rgba(255,255,255,0.03);
 			border-color: var(--border);
 			color: var(--text);
+		}
+		.button--ghost:hover {
+			border-color: rgba(4, 107, 210, 0.4);
+			background: rgba(4, 107, 210, 0.1);
 		}
 
 		.toolbar {
@@ -182,29 +219,41 @@
 			border: 1px solid var(--border);
 			background: rgba(255,255,255,0.02);
 			color: var(--text);
-			padding: 10px 14px;
+			padding: 10px 16px;
 			border-radius: 999px;
 			font: inherit;
+			font-weight: 600;
+			font-size: 0.92rem;
 			cursor: pointer;
-			transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+			transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 		}
-		.filter-btn:hover { transform: translateY(-1px); border-color: rgba(226,92,42,0.7); }
-		.filter-btn.active { background: rgba(226,92,42,0.16); border-color: rgba(226,92,42,0.8); color: #fff; }
+		.filter-btn:hover {
+			transform: translateY(-1px);
+			border-color: rgba(4, 107, 210, 0.6);
+			background: rgba(4, 107, 210, 0.1);
+		}
+		.filter-btn.active {
+			background: linear-gradient(135deg, var(--accent), var(--accent-2));
+			border-color: transparent;
+			color: #fff;
+			box-shadow: 0 8px 18px rgba(4, 107, 210, 0.35);
+		}
 		.search {
 			width: 100%;
 			background: var(--surface);
 			border: 1px solid var(--border);
 			border-radius: 18px;
-			padding: 14px 16px;
+			padding: 14px 18px;
 			color: var(--text);
 			font: inherit;
 			outline: none;
 			transition: border-color 160ms ease, box-shadow 160ms ease;
 		}
 		.search:focus {
-			border-color: rgba(226,92,42,0.85);
-			box-shadow: 0 0 0 4px rgba(226,92,42,0.15);
+			border-color: rgba(4, 107, 210, 0.85);
+			box-shadow: 0 0 0 4px rgba(4, 107, 210, 0.2);
 		}
+		.search::placeholder { color: #64748b; }
 		.search::placeholder { color: #7d8793; }
 
 		.status {
@@ -235,8 +284,8 @@
 		}
 		.card:hover {
 			transform: translateY(-4px);
-			box-shadow: 0 18px 34px rgba(0,0,0,0.24);
-			border-color: rgba(226,92,42,0.8);
+			box-shadow: 0 18px 36px rgba(4, 107, 210, 0.22);
+			border-color: rgba(4, 107, 210, 0.6);
 		}
 		.card__top {
 			display: flex;
@@ -294,22 +343,56 @@
 		.card__footer {
 			margin-top: auto;
 			display: flex;
-			flex-wrap: wrap;
+			flex-direction: column;
 			gap: 12px;
-			align-items: center;
-			justify-content: space-between;
 			padding-top: 14px;
+			border-top: 1px solid rgba(255,255,255,0.05);
 		}
+		.card__actions {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+		.site-link {
+			text-decoration: none;
+			background: linear-gradient(135deg, #2563eb, #3b82f6);
+			color: #fff;
+			border-radius: 999px;
+			padding: 8px 16px;
+			font-weight: 700;
+			font-size: 0.9rem;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			transition: transform 160ms ease, box-shadow 160ms ease;
+			box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+		}
+		.site-link:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45); }
 		.repo-link {
 			text-decoration: none;
 			background: var(--accent);
 			color: #fff;
 			border-radius: 999px;
-			padding: 10px 14px;
+			padding: 8px 16px;
 			font-weight: 700;
-			transition: transform 160ms ease, box-shadow 160ms ease;
+			font-size: 0.9rem;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
 		}
-		.repo-link:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(226,92,42,0.28); }
+		.repo-link:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(226,92,42,0.28); }
+		.repo-link--secondary {
+			background: rgba(255,255,255,0.06);
+			color: var(--text);
+			border: 1px solid var(--border);
+		}
+		.repo-link--secondary:hover {
+			background: rgba(255,255,255,0.12);
+			border-color: rgba(255,255,255,0.2);
+			box-shadow: none;
+		}
 		.muted { color: var(--muted); }
 
 		.empty-state,
@@ -432,11 +515,12 @@
 			<section class="hero">
 				<div class="shell">
 					<div class="hero__panel">
-						<h1>Projetos CONSELT</h1>
-						<p>Organização de projetos técnicos da Empresa Júnior de Engenharia Elétrica da UFU. Explore os repositórios públicos, filtre por área de serviço e acompanhe os projetos do portfólio técnico da CONSELT.</p>
+						<div class="hero__badge">💎 CONSELT · Empresa Jr. de Consultoria em Engenharia Elétrica (UFU)</div>
+						<h1>Transforme ideias em realidade com a <span class="gradient-text">CONSELT</span></h1>
+						<p>Hub central de soluções tecnológicas e portfólio de projetos desenvolvidos pela CONSELT. Explore os repositórios técnicos públicos, filtre por área de atuação e acesse as hospedagens diretamente.</p>
 						<div class="cta-row">
-							<a class="button button--primary" href="https://conselt.com.br" target="_blank" rel="noopener noreferrer">Acessar o site da CONSELT</a>
-							<a class="button button--ghost" href="https://github.com/Projetos-CONSELT/.github" target="_blank" rel="noopener noreferrer">Ver organização no GitHub</a>
+							<a class="button button--primary" href="https://conselt.com.br" target="_blank" rel="noopener noreferrer">🌐 Acessar conselt.com.br</a>
+							<a class="button button--ghost" href="https://github.com/Projetos-CONSELT/.github" target="_blank" rel="noopener noreferrer">📁 Organização no GitHub</a>
 						</div>
 					</div>
 				</div>
@@ -513,7 +597,7 @@
 			const name = String(repo.name || '').toLowerCase();
 
 			if (topics.includes('web-dev') || name.includes('web') || name.includes('site') || name.includes('wordpress')) {
-				return { key: 'web-dev', label: '🌐 Web Dev', color: '#2563eb' };
+				return { key: 'web-dev', label: '🌐 Web Dev', color: '#046BD2' };
 			}
 
 			if (topics.includes('luminotecnica') || name.includes('lumino') || name.includes('dialux') || name.includes('iluminacao')) {
@@ -525,10 +609,10 @@
 			}
 
 			if (topics.includes('automacao') || name.includes('automacao') || name.includes('arduino') || name.includes('esp32')) {
-				return { key: 'automacao-residencial', label: '🏠 Automação', color: '#16a34a' };
+				return { key: 'automacao-residencial', label: '🏠 Automação', color: '#059669' };
 			}
 
-			return { key: 'outros', label: '📁 Interno', color: '#6b7280' };
+			return { key: 'outros', label: '📁 Interno', color: '#475569' };
 		}
 
 		async function ghFetch(url, acceptHeader) {
@@ -613,6 +697,10 @@
 				const updated = repo.updated_at ? new Date(repo.updated_at).toLocaleDateString('pt-BR') : 'Data indisponível';
 				const language = repo.language || 'Não informado';
 
+				const siteUrl = (repo.homepage && repo.homepage.trim() !== '')
+					? repo.homepage
+					: (repo.has_pages ? `https://${ORG.toLowerCase()}.github.io/${repo.name}/` : null);
+
 				return `
 					<article class="card">
 						<div class="card__top">
@@ -632,7 +720,10 @@
 						</div>
 
 						<div class="card__footer">
-							<a class="repo-link" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">Ver Repositório</a>
+							<div class="card__actions">
+								${siteUrl ? `<a class="site-link" href="${siteUrl}" target="_blank" rel="noopener noreferrer">🌐 Acessar Website</a>` : ''}
+								<a class="${siteUrl ? 'repo-link repo-link--secondary' : 'repo-link'}" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">📁 GitHub</a>
+							</div>
 							<span class="muted">${(repo.topics || []).slice(0, 3).join(' · ') || 'Sem tópicos públicos'}</span>
 						</div>
 					</article>
