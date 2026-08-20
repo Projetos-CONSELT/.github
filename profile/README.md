@@ -1,18 +1,20 @@
-<div align="center">
-	<img src="https://conselt.com.br/wp-content/uploads/2024/03/logo-1.png" alt="Logo CONSELT" width="180" />
+<p align="center">
+  <img src="https://conselt.com.br/wp-content/uploads/2024/03/logo-1.png" alt="Logo CONSELT" width="180" />
+</p>
 
-	# Projetos CONSELT
+<h1 align="center">Projetos CONSELT</h1>
 
-	<p><strong>Empresa Júnior de Engenharia Elétrica da UFU · Uberlândia, MG</strong></p>
+<p align="center">
+  <strong>Empresa Júnior de Engenharia Elétrica da UFU · Uberlândia, MG</strong>
+</p>
 
-	<br />
+<p align="center">
+  <a href="https://projetos-conselt.github.io/.github/">
+    <img src="https://img.shields.io/badge/%F0%9F%9A%80%20ACESSAR%20DASHBOARD%20DE%20PROJETOS-046BD2?style=for-the-badge&logo=githubpages&logoColor=white" height="42" alt="Acessar Dashboard de Projetos" />
+  </a>
+</p>
 
-	<a href="https://projetos-conselt.github.io/.github/">
-		<img src="https://img.shields.io/badge/%F0%9F%9A%80%20ACESSAR%20DASHBOARD%20DE%20PROJETOS-046BD2?style=for-the-badge&logo=githubpages&logoColor=white" height="42" alt="Acessar Dashboard de Projetos" />
-	</a>
-
-	<br /><br />
-</div>
+---
 
 CONSELT é uma empresa júnior sem fins lucrativos vinculada à Faculdade de Engenharia Elétrica da UFU. Desenvolvemos projetos técnicos reais para clientes e parceiros, sempre com supervisão de professores e foco em impacto social, aprendizado prático e formação profissional dos membros.
 
@@ -24,15 +26,13 @@ Nossa missão é promover o desenvolvimento profissional e pessoal dos estudante
 
 Explore nossos projetos públicos, filtre por área de atuação e acesse as aplicações e sites diretamente:
 
-<div align="center">
-	<br />
-	<a href="https://projetos-conselt.github.io/.github/">
-		<img src="https://img.shields.io/badge/%E2%9C%A8%20VER%20DASHBOARD%20COMPLETO%20DE%20PROJETOS%20%E2%86%92-046BD2?style=for-the-badge&logo=googlechrome&logoColor=white" height="48" alt="Ver Dashboard Completo" />
-	</a>
-	<br />
-	<sub>🔗 Link direto: <a href="https://projetos-conselt.github.io/.github/"><strong>projetos-conselt.github.io/.github</strong></a></sub>
-	<br /><br />
-</div>
+<p align="center">
+  <a href="https://projetos-conselt.github.io/.github/">
+    <img src="https://img.shields.io/badge/%E2%9C%A8%20VER%20DASHBOARD%20COMPLETO%20DE%20PROJETOS%20%E2%86%92-046BD2?style=for-the-badge&logo=googlechrome&logoColor=white" height="48" alt="Ver Dashboard Completo" />
+  </a>
+  <br />
+  <sub>🔗 Link direto: <a href="https://projetos-conselt.github.io/.github/"><strong>projetos-conselt.github.io/.github</strong></a></sub>
+</p>
 
 ---
 
@@ -61,6 +61,6 @@ Explore nossos projetos públicos, filtre por área de atuação e acesse as apl
 
 ---
 
-<div align="center">
-	Desenvolvido por <strong>CONSELT</strong> · <a href="https://conselt.com.br">conselt.com.br</a>
-</div>
+<p align="center">
+  Desenvolvido por <strong>CONSELT</strong> · <a href="https://conselt.com.br">conselt.com.br</a>
+</p>

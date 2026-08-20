@@ -4,6 +4,9 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Projetos CONSELT</title>
+	<link rel="icon" type="image/png" href="https://conselt.com.br/wp-content/uploads/2024/03/logo-1.png" />
+	<link rel="shortcut icon" type="image/png" href="https://conselt.com.br/wp-content/uploads/2024/03/logo-1.png" />
+	<link rel="apple-touch-icon" href="https://conselt.com.br/wp-content/uploads/2024/03/logo-1.png" />
 	<style>
 		:root {
 			--bg: #090d16;
@@ -278,8 +281,8 @@
 		.card {
 			display: flex;
 			flex-direction: column;
-			padding: 18px;
-			min-height: 250px;
+			padding: 20px;
+			min-height: auto;
 			transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 		}
 		.card:hover {
@@ -292,32 +295,26 @@
 			align-items: flex-start;
 			gap: 12px;
 			justify-content: space-between;
-			margin-bottom: 12px;
+			margin-bottom: 14px;
 		}
 		.repo-name {
 			margin: 0;
-			font-size: 1.06rem;
+			font-size: 1.08rem;
 			line-height: 1.35;
 			letter-spacing: -0.01em;
 		}
 		.repo-meta {
 			display: grid;
 			gap: 10px;
-			margin-top: 10px;
+			margin-top: 6px;
 			color: var(--muted);
-			font-size: 0.92rem;
-		}
-		.description {
-			color: #c9d1d9;
-			margin: 6px 0 14px;
-			line-height: 1.55;
-			min-height: 52px;
+			font-size: 0.88rem;
 		}
 		.badges {
 			display: flex;
 			gap: 8px;
 			flex-wrap: wrap;
-			margin-bottom: 12px;
+			margin-bottom: 16px;
 		}
 		.badge {
 			display: inline-flex;
@@ -757,8 +754,6 @@
 							</div>
 							<span class="badge badge--area" style="background:${area.color}">${area.label}</span>
 						</div>
-
-						<p class="description">${description}</p>
 
 						<div class="badges">
 							${languageBadge(language)}
