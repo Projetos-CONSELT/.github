@@ -24,12 +24,13 @@ CONSELT é uma associação civil sem fins lucrativos que desenvolve serviços e
 
 ## Áreas de Serviço
 
-Os repositórios desta organização são organizados em quatro áreas ativas — cada projeto deve indicar a qual área pertence usando a tag correspondente no README e nas labels do repositório:
+Os repositórios desta organização são organizados em cinco áreas ativas — cada projeto deve indicar a qual área pertence usando a tag correspondente no README e nas labels do repositório:
 
-1. web-dev — Desenvolvimento Web (sites WordPress, e-commerces, web apps)
-2. luminotecnica — Projetos de luminotécnica (DIALux, conforto visual)
-3. itel — Projetos elétricos (AutoCAD, Revit)
-4. automacao-residencial — Automação residencial
+1. `website` (ou `web-dev`) — Websites institucionais, landing pages e e-commerces
+2. `aplicativo` (ou `app`) — Aplicativos móveis, sistemas de gestão e plataformas
+3. `luminotecnica` — Projetos de luminotécnica (DIALux, conforto visual)
+4. `itel` — Projetos de instalações elétricas (AutoCAD, Revit)
+5. `automacao` (ou `automacao-residencial`) — Automação residencial e IoT
 
 ## Diretrizes para repositórios
 

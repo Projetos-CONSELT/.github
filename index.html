@@ -530,10 +530,11 @@
 				<div class="toolbar" aria-label="Ferramentas do dashboard">
 					<div class="filters" id="filters">
 						<button class="filter-btn active" data-area="all" type="button">Todos</button>
-						<button class="filter-btn" data-area="web-dev" type="button">🌐 Web</button>
+						<button class="filter-btn" data-area="website" type="button">🌐 Website</button>
+						<button class="filter-btn" data-area="aplicativo" type="button">📱 Aplicativo</button>
 						<button class="filter-btn" data-area="luminotecnica" type="button">💡 Luminotécnica</button>
 						<button class="filter-btn" data-area="itel" type="button">⚡ ITEL</button>
-						<button class="filter-btn" data-area="automacao-residencial" type="button">🏠 Automação</button>
+						<button class="filter-btn" data-area="automacao" type="button">🏠 Automação</button>
 					</div>
 					<input class="search" id="searchInput" type="search" placeholder="Buscar projeto..." autocomplete="off" />
 				</div>
@@ -563,6 +564,7 @@
 	<script>
 		const ORG = 'Projetos-CONSELT';
 		const API_BASE = 'https://api.github.com';
+		const HIDDEN_REPOS = ['.github', 'dashboard', 'introducao-projetos-conselt', 'projetos-conselt.github.io'];
 		const state = {
 			repos: [],
 			filter: 'all',
@@ -580,6 +582,8 @@
 			'C++': '#f34b7d',
 			Java: '#b07219',
 			Dart: '#00B4AB',
+			Kotlin: '#A97BFF',
+			Swift: '#F05138',
 			Shell: '#89e051'
 		};
 
@@ -593,26 +597,65 @@
 		}
 
 		function getServiceArea(repo) {
-			const topics = (repo.topics || []).map((topic) => String(topic).toLowerCase());
+			const topics = (repo.topics || []).map((t) => String(t).toLowerCase());
 			const name = String(repo.name || '').toLowerCase();
+			const desc = String(repo.description || '').toLowerCase();
+			const lang = String(repo.language || '').toLowerCase();
+			const combined = `${name} ${desc} ${topics.join(' ')}`;
 
-			if (topics.includes('web-dev') || name.includes('web') || name.includes('site') || name.includes('wordpress')) {
-				return { key: 'web-dev', label: '🌐 Web Dev', color: '#046BD2' };
-			}
-
-			if (topics.includes('luminotecnica') || name.includes('lumino') || name.includes('dialux') || name.includes('iluminacao')) {
+			// 1. Luminotécnica
+			if (
+				topics.some((t) => ['luminotecnica', 'lumino', 'dialux', 'iluminacao', 'lighting', 'iluminotecnica'].includes(t)) ||
+				/luminot[eé]cnica|dialux|ilumina[cç]|lighting|luz\b|lumin[aá]ria/.test(combined)
+			) {
 				return { key: 'luminotecnica', label: '💡 Luminotécnica', color: '#d97706' };
 			}
 
-			if (topics.includes('itel') || name.includes('eletric') || name.includes('itel') || name.includes('projeto-eletrico')) {
+			// 2. ITEL (Instalações e Projetos Elétricos)
+			if (
+				topics.some((t) => ['itel', 'eletrico', 'eletrica', 'subestacao', 'spda', 'instalacoes', 'autocad', 'revit'].includes(t)) ||
+				/\bitel\b|el[eé]tric|subesta[cç]|spda|instala[cç][oõ]es|quadro|autocad|revit|pot[eê]ncia|unifilar/.test(combined)
+			) {
 				return { key: 'itel', label: '⚡ ITEL', color: '#7c3aed' };
 			}
 
-			if (topics.includes('automacao') || name.includes('automacao') || name.includes('arduino') || name.includes('esp32')) {
-				return { key: 'automacao-residencial', label: '🏠 Automação', color: '#059669' };
+			// 3. Automação
+			if (
+				topics.some((t) => ['automacao', 'automacao-residencial', 'iot', 'arduino', 'esp32', 'esp8266', 'raspberry', 'clp', 'plc', 'robotica', 'sensors'].includes(t)) ||
+				/automa[cç]|arduino|esp32|esp8266|iot\b|internet das coisas|embarcados|sensores|microcontrol|clp\b|plc\b/.test(combined)
+			) {
+				return { key: 'automacao', label: '🏠 Automação', color: '#059669' };
 			}
 
-			return { key: 'outros', label: '📁 Interno', color: '#475569' };
+			// 4. Aplicativo (Mobile, Desktop, App, Sistemas, Flow, Plataformas)
+			if (
+				topics.some((t) => ['app', 'mobile', 'aplicativo', 'flutter', 'react-native', 'android', 'ios', 'kotlin', 'swift', 'expo', 'electron', 'pwa', 'sistema', 'plataforma'].includes(t)) ||
+				/\bapp\b|mobile|aplicativo|flutter|react-native|android|ios|swift|kotlin|expo|sistema\b|plataforma\b|software\b|flow\b|vitaliza/.test(combined) ||
+				['dart', 'kotlin', 'swift'].includes(lang)
+			) {
+				return { key: 'aplicativo', label: '📱 Aplicativo', color: '#0284c7' };
+			}
+
+			// 5. Website (Web, Landing Page, Portal, E-commerce, WordPress, Frontend)
+			if (
+				topics.some((t) => ['website', 'web', 'web-dev', 'landing-page', 'site', 'portal', 'ecommerce', 'e-commerce', 'wordpress', 'woocommerce', 'html', 'css', 'frontend', 'institucional'].includes(t)) ||
+				/\bwebsite\b|\bsite\b|\bweb\b|landing\s*page|portal|ecommerce|e-commerce|wordpress|institucional|blog|vitrine|loja/.test(combined) ||
+				['html', 'css', 'php'].includes(lang) ||
+				Boolean(repo.homepage || repo.has_pages)
+			) {
+				return { key: 'website', label: '🌐 Website', color: '#046BD2' };
+			}
+
+			// 6. Heurística padrão baseada na linguagem
+			if (['typescript', 'javascript', 'vue', 'react'].includes(lang)) {
+				return { key: 'website', label: '🌐 Website', color: '#046BD2' };
+			}
+			if (['c', 'c++', 'python'].includes(lang)) {
+				return { key: 'automacao', label: '🏠 Automação', color: '#059669' };
+			}
+
+			// Fallback padrão
+			return { key: 'website', label: '🌐 Website', color: '#046BD2' };
 		}
 
 		async function ghFetch(url, acceptHeader) {
@@ -701,6 +744,10 @@
 					? repo.homepage
 					: (repo.has_pages ? `https://${ORG.toLowerCase()}.github.io/${repo.name}/` : null);
 
+				const actionLabel = area.key === 'aplicativo'
+					? '📱 Acessar Aplicativo'
+					: (area.key === 'website' ? '🌐 Acessar Website' : '🚀 Acessar Projeto');
+
 				return `
 					<article class="card">
 						<div class="card__top">
@@ -721,7 +768,7 @@
 
 						<div class="card__footer">
 							<div class="card__actions">
-								${siteUrl ? `<a class="site-link" href="${siteUrl}" target="_blank" rel="noopener noreferrer">🌐 Acessar Website</a>` : ''}
+								${siteUrl ? `<a class="site-link" href="${siteUrl}" target="_blank" rel="noopener noreferrer">${actionLabel}</a>` : ''}
 								<a class="${siteUrl ? 'repo-link repo-link--secondary' : 'repo-link'}" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">📁 GitHub</a>
 							</div>
 							<span class="muted">${(repo.topics || []).slice(0, 3).join(' · ') || 'Sem tópicos públicos'}</span>
@@ -770,7 +817,10 @@
 				createSkeletonCards();
 				status.textContent = 'Carregando projetos da organização...';
 
-				const repos = await fetchAllRepos();
+				const allFetchedRepos = await fetchAllRepos();
+				const repos = allFetchedRepos.filter(
+					(repo) => !HIDDEN_REPOS.includes(String(repo.name || '').toLowerCase())
+				);
 
 				if (!repos.length) {
 					state.repos = [];
@@ -791,7 +841,7 @@
 				);
 
 				state.repos = reposWithTopics.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-				status.textContent = `${state.repos.length} projetos carregados.`;
+				status.textContent = `${state.repos.length} projeto${state.repos.length === 1 ? '' : 's'} carregado${state.repos.length === 1 ? '' : 's'}.`;
 				applyFilters();
 			} catch (error) {
 				console.error(error);

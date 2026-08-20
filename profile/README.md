@@ -4,31 +4,52 @@
 	# Projetos CONSELT
 
 	<p><strong>Empresa Júnior de Engenharia Elétrica da UFU · Uberlândia, MG</strong></p>
+
+	<br />
+
+	<a href="https://projetos-conselt.github.io/.github/">
+		<img src="https://img.shields.io/badge/%F0%9F%9A%80%20ACESSAR%20DASHBOARD%20DE%20PROJETOS-046BD2?style=for-the-badge&logo=githubpages&logoColor=white" height="42" alt="Acessar Dashboard de Projetos" />
+	</a>
+
+	<br /><br />
 </div>
 
 CONSELT é uma empresa júnior sem fins lucrativos vinculada à Faculdade de Engenharia Elétrica da UFU. Desenvolvemos projetos técnicos reais para clientes e parceiros, sempre com supervisão de professores e foco em impacto social, aprendizado prático e formação profissional dos membros.
 
 Nossa missão é promover o desenvolvimento profissional e pessoal dos estudantes, conectando universidade e sociedade por meio de soluções de engenharia com qualidade e responsabilidade.
 
+---
+
+### 🚀 Portal Interativo de Projetos
+
+Explore nossos projetos públicos, filtre por área de atuação e acesse as aplicações e sites diretamente:
+
+<div align="center">
+	<br />
+	<a href="https://projetos-conselt.github.io/.github/">
+		<img src="https://img.shields.io/badge/%E2%9C%A8%20VER%20DASHBOARD%20COMPLETO%20DE%20PROJETOS%20%E2%86%92-046BD2?style=for-the-badge&logo=googlechrome&logoColor=white" height="48" alt="Ver Dashboard Completo" />
+	</a>
+	<br />
+	<sub>🔗 Link direto: <a href="https://projetos-conselt.github.io/.github/"><strong>projetos-conselt.github.io/.github</strong></a></sub>
+	<br /><br />
+</div>
+
+---
+
 ## Áreas de atuação
 
-| Área | Descrição | Ferramentas |
-|------|-----------|-------------|
-| 🌐 Desenvolvimento Web | Sites e e-commerces profissionais | WordPress, WooCommerce |
-| 💡 Luminotécnica | Projetos de iluminação personalizados | DIALux |
-| ⚡ ITEL | Projetos elétricos completos | AutoCAD, Revit |
-| 🏠 Automação Residencial | Automação descentralizada | Arduino, ESP32 |
+| Área | Descrição | Tecnologias / Ferramentas |
+|------|-----------|---------------------------|
+| 🌐 Website | Sites institucionais, landing pages e e-commerces | WordPress, WooCommerce, React, Next.js |
+| 📱 Aplicativo | Aplicativos móveis, sistemas de gestão e plataformas | Flutter, React Native, TypeScript, Node.js |
+| 💡 Luminotécnica | Projetos de iluminação personalizados e eficiência energética | DIALux, AutoCAD |
+| ⚡ ITEL | Projetos de instalações elétricas, SPDA e subestações | AutoCAD, Revit |
+| 🏠 Automação | Automação residencial, predial e dispositivos inteligentes IoT | Arduino, ESP32, Sensores |
 
 ## Estatísticas
 
-![Portfólio técnico](https://img.shields.io/badge/Portf%C3%B3lio%20t%C3%A9cnico-CONSELT-0d1117?style=flat&logo=github&logoColor=white)
+![Portfólio técnico](https://img.shields.io/badge/Portf%C3%B3lio%20t%C3%A9cnico-CONSELT-046BD2?style=flat&logo=github&logoColor=white)
 ![Seguidores](https://img.shields.io/github/followers/Projetos-CONSELT?label=Seguidores&style=social)
-
-<div align="center">
-	<a href="https://projetos-conselt.github.io/.github/">
-		<img src="https://img.shields.io/badge/%F0%9F%94%97%20Ver%20Dashboard%20Completo%20de%20Projetos-0d1117?style=for-the-badge&logo=github&logoColor=white" alt="Ver Dashboard Completo" />
-	</a>
-</div>
 
 ## Contato
 
